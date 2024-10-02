@@ -1,8 +1,8 @@
-  import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:test_drive/theme/theme.dart';
-  import 'package:test_drive/widgets/custom_scaffold.dart';
-  import 'package:test_drive/screens/signup_screen.dart';
-  import 'package:icons_plus/icons_plus.dart';
+import 'package:test_drive/widgets/custom_scaffold.dart';
+import 'package:test_drive/screens/signup_screen.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 
 

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "370129970059",
+    "project_id": "smartutility-40ce8",
+    "storage_bucket": "smartutility-40ce8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:370129970059:android:db4e7b28c59afda757c58e",
+        "android_client_info": {
+          "package_name": "com.example.test_drive"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSxhrlfu_LEQ3Z9hsSN2Kr1pb9PvcnDv4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
