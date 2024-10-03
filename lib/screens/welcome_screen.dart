@@ -29,7 +29,8 @@ class WelcomeScreen extends StatelessWidget{
                         text: 'Welcome Back!\n',
                         style: TextStyle(
                           fontSize: 45.0
-                          ,fontWeight: FontWeight.w600                        )
+                          ,fontWeight: FontWeight.w600                        
+                          )
                       ),
                       TextSpan(
                         text:'\nEnter personal details to your employee account',

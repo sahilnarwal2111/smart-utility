@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:test_drive/screens/client_home_page.dart';
 import 'package:test_drive/theme/theme.dart';
 import 'package:test_drive/widgets/custom_scaffold.dart';
 import 'package:test_drive/screens/signup_screen.dart';
 import 'package:icons_plus/icons_plus.dart';
+
 
 
 
@@ -16,6 +18,19 @@ import 'package:icons_plus/icons_plus.dart';
 class _SignInScreenState extends State<SignInScreen> {
   final _formSignInKey = GlobalKey<FormState>();
   bool rememberPassword = true;
+  String _email = "";
+  String _password = "";
+
+  void _submitForm(){
+    if(_formSignInKey.currentState!.validate()){
+      _formSignInKey.currentState!.save();
+      Navigator.push(
+        context, 
+        MaterialPageRoute(builder: (context)=> const ClientProfile()),
+        );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
@@ -61,6 +76,9 @@ class _SignInScreenState extends State<SignInScreen> {
                             return 'Please enter Email';
                           }
                           return null;
+                        },
+                        onSaved: (value){
+                          _email = value!;
                         },
                         decoration: InputDecoration(
                           label: const Text('Email'),
@@ -156,14 +174,16 @@ class _SignInScreenState extends State<SignInScreen> {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
+                       
                           onPressed: () {
                             if (_formSignInKey.currentState!.validate() &&
                                 rememberPassword) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Processing Data'),
-                                ),
-                              );
+                                  _submitForm();
+                              // ScaffoldMessenger.of(context).showSnackBar(
+                              //   const SnackBar(
+                              //     content: Text('Processing Data'),
+                              //   ),
+                              // );
                             } else if (!rememberPassword) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
