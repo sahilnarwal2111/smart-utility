@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:test_drive/screens/signin_screen.dart';
-import 'package:test_drive/screens/signup_screen.dart';
+import 'package:test_drive/screens/signin_screen_client.dart';
+import 'package:test_drive/screens/signup_screen_client.dart';
 import 'package:test_drive/widgets/custom_scaffold.dart';
 import 'package:test_drive/widgets/welcome_button.dart';
 import 'package:test_drive/theme/theme.dart';
+import 'package:test_drive/widgets/toggle_button.dart';
 
 class WelcomeScreen extends StatelessWidget{
-  const WelcomeScreen({super.key});
+  WelcomeScreen({super.key});
+  String selectedState = 'Client';
+  void handleSelectionChnage(String value){
+    selectedState = value;
+  }
+  
 
+  bool isClientSelected = true;
   @override
   Widget build(BuildContext context) {
     return  CustomScaffold(
@@ -26,23 +33,24 @@ class WelcomeScreen extends StatelessWidget{
                   text: const TextSpan(
                     children: [
                       TextSpan(
-                        text: 'Welcome Back!\n',
+                        text: 'Welcome to Smart Utility!\n',
                         style: TextStyle(
                           fontSize: 45.0
                           ,fontWeight: FontWeight.w600                        
                           )
                       ),
-                      TextSpan(
-                        text:'\nEnter personal details to your employee account',
-                        style: TextStyle(
-                          fontSize: 20,
-                        )
-                      )
+                      
                     ]
                   )
                 ),
                 ),
-          )),
+          )
+          ),
+          Center(
+            child: ToggleButtonClientProvider(
+              onSelectedChanged: handleSelectionChnage,
+            ),
+          ),
           Flexible(
             flex: 1,
             child : Align(
@@ -75,3 +83,4 @@ class WelcomeScreen extends StatelessWidget{
       );
   }
 }
+
