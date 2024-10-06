@@ -3,18 +3,28 @@ import 'package:test_drive/theme/theme.dart';
 import 'package:test_drive/widgets/custom_scaffold.dart';
 import 'package:test_drive/screens/signin_screen_client.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:test_drive/screens/provider_home_page.dart';
 
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+class ProviderSignUpScreen extends StatefulWidget {
+  const ProviderSignUpScreen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<ProviderSignUpScreen> createState() => _ProviderSignUpScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _ProviderSignUpScreenState extends State<ProviderSignUpScreen> {
   final _formSignupKey = GlobalKey<FormState>();
   bool agreePersonalData = true;
+  void _submitForm(){
+    if(_formSignupKey.currentState!.validate()){
+      _formSignupKey.currentState!.save();
+      Navigator.push(
+        context, 
+        MaterialPageRoute(builder: (context)=> const ProviderProfile()),
+        );
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
@@ -188,11 +198,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           onPressed: () {
                             if (_formSignupKey.currentState!.validate() &&
                                 agreePersonalData) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Processing Data'),
-                                ),
-                              );
+                                  _submitForm();
+                              // ScaffoldMessenger.of(context).showSnackBar(
+                              //   const SnackBar(
+                              //     content: Text('Processing Data'),
+                              //   ),
+                              // );
                             } else if (!agreePersonalData) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
@@ -268,7 +279,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (e) => const SignInScreen(),
+                                  builder: (e) => const ProviderSignUpScreen(),
                                 ),
                               );
                             },

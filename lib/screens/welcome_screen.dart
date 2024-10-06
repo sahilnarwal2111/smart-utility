@@ -5,6 +5,8 @@ import 'package:test_drive/widgets/custom_scaffold.dart';
 import 'package:test_drive/widgets/welcome_button.dart';
 import 'package:test_drive/theme/theme.dart';
 import 'package:test_drive/widgets/toggle_button.dart';
+import 'package:test_drive/screens/signin_screen_provider.dart';
+import 'package:test_drive/screens/signup_screen_provider.dart';
 
 class WelcomeScreen extends StatelessWidget{
   WelcomeScreen({super.key});
@@ -14,7 +16,6 @@ class WelcomeScreen extends StatelessWidget{
   }
   
 
-  bool isClientSelected = true;
   @override
   Widget build(BuildContext context) {
     return  CustomScaffold(
@@ -57,10 +58,23 @@ class WelcomeScreen extends StatelessWidget{
               alignment: Alignment.bottomRight,
               child: Row(
               children: [
-                const Expanded(
+                Expanded(
                   child: WelcomeButton(
                     buttonText: 'Sign in',
-                    onTap: SignInScreen(),
+                    onTap: (context) {
+                      if(selectedState == 'Client'){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ClientSignInScreen()),
+                        );
+                      }
+                      else{
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ProviderSignInScreen()),
+                        );
+                      }
+                    },
                     color: Colors.transparent,
                     textColor: Colors.white,
                   )
@@ -68,7 +82,20 @@ class WelcomeScreen extends StatelessWidget{
                 Expanded(
                   child: WelcomeButton(
                     buttonText: 'Sign up',
-                    onTap: const SignUpScreen(),
+                    onTap: (context) {
+                      if(selectedState == 'Client'){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ClientSignUpScreen()),
+                        );
+                      }
+                      else{
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ProviderSignUpScreen()),
+                        );
+                      }
+                    },
                     color: Colors.white,
                     textColor: lightColorScheme.primary,
                   )

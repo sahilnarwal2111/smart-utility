@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_drive/screens/client_dashboard.dart';
 
 class ClientProfile extends StatefulWidget{
   const ClientProfile({super.key});
@@ -86,7 +87,29 @@ class _ClientProfile extends State<ClientProfile> {
                 onSaved: (value){
                   _address2 = value!;
                 },
-              )
+              ),
+              const Expanded(
+            flex: 1,
+            child: SizedBox(
+              height: 3,
+            ),
+          ),
+              SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(                  
+                  onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ClientDashboard(
+                          address1: _address1,
+                          address2: _address2
+                        )
+                        ),
+                      );
+                    },
+                    child: const Text('Submit'),
+                  ),
+                ),
             ],
           ),
           ) 

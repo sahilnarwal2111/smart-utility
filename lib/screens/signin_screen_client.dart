@@ -8,14 +8,14 @@ import 'package:icons_plus/icons_plus.dart';
 
 
 
-  class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+  class ClientSignInScreen extends StatefulWidget {
+  const ClientSignInScreen({super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<ClientSignInScreen> createState() => _ClientSignInScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _ClientSignInScreenState extends State<ClientSignInScreen> {
   final _formSignInKey = GlobalKey<FormState>();
   bool rememberPassword = true;
   String _email = "";
@@ -192,7 +192,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               );
                             }
                           },
-                          child: const Text('Sign up'),
+                          child: const Text('Sign in'),
                         ),
                       ),
                       const SizedBox(
@@ -257,7 +257,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (e) => const SignUpScreen(),
+                                  builder: (e) => const ClientSignUpScreen(),
                                 ),
                               );
                             },

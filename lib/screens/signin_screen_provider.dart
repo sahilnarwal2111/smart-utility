@@ -4,18 +4,19 @@ import 'package:test_drive/theme/theme.dart';
 import 'package:test_drive/widgets/custom_scaffold.dart';
 import 'package:test_drive/screens/signup_screen_client.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:test_drive/screens/provider_home_page.dart';
 
 
 
 
-  class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+  class ProviderSignInScreen extends StatefulWidget {
+  const ProviderSignInScreen({super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<ProviderSignInScreen> createState() => _ProviderSignInScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _ProviderSignInScreenState extends State<ProviderSignInScreen> {
   final _formSignInKey = GlobalKey<FormState>();
   bool rememberPassword = true;
   String _email = "";
@@ -26,7 +27,7 @@ class _SignInScreenState extends State<SignInScreen> {
       _formSignInKey.currentState!.save();
       Navigator.push(
         context, 
-        MaterialPageRoute(builder: (context)=> const ClientProfile()),
+        MaterialPageRoute(builder: (context)=> const ProviderProfile()),
         );
     }
   }
@@ -192,7 +193,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               );
                             }
                           },
-                          child: const Text('Sign up'),
+                          child: const Text('Sign in'),
                         ),
                       ),
                       const SizedBox(
@@ -257,7 +258,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (e) => const SignUpScreen(),
+                                  builder: (e) => const ProviderSignInScreen(),
                                 ),
                               );
                             },
