@@ -1,10 +1,17 @@
 const express = require('express');
 const connectDB = require('./config/config');  // Import the database config
+const AuthRouter = require('./routes/AuthRoutes');
+
 
 const app = express();
 
 // Middleware setup
 app.use(express.json()); // For parsing JSON requests
+
+
+// setting API's 
+app.use("/api",AuthRouter);
+
 
 // Function to start the server
 const startServer = () => {
