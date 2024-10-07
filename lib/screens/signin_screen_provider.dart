@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:test_drive/screens/client_home_page.dart';
 import 'package:test_drive/theme/theme.dart';
 import 'package:test_drive/widgets/custom_scaffold.dart';
-import 'package:test_drive/screens/signup_screen_client.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:test_drive/screens/provider_home_page.dart';
 

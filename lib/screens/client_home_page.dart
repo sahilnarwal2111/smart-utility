@@ -98,6 +98,7 @@ class _ClientProfile extends State<ClientProfile> {
                   width: double.infinity,
                   child: ElevatedButton(                  
                   onPressed: () {
+                     _clientProfile.currentState!.save();
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => ClientDashboard(

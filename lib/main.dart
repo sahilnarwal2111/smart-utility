@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:test_drive/screens/welcome_screen.dart';
-import 'package:test_drive/screens/client_home_page.dart';
 
 void main(){
   runApp(MyApp());
