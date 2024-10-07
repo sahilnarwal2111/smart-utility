@@ -1,12 +1,24 @@
-const express = require("express");
-require("dotenv").config();
+const express = require('express');
+const connectDB = require('./config/config');  // Import the database config
 
-const app= express();
+const app = express();
 
-const PORT = process.env.PORT || 3000;
-app.get("/",(req,res)=>{
-    res.send("This is API");
-})
-app.listen(PORT , () => {
-    console.log(`server running on PORT ${PORT} `);
-})
+// Middleware setup
+app.use(express.json()); // For parsing JSON requests
+
+// Function to start the server
+const startServer = () => {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+};
+
+// Connect to MongoDB and start the server only if the connection is successful
+connectDB().then((connected) => {
+  if (connected) {
+    startServer();  // Start the server if MongoDB connection is successful
+  }
+}).catch((err) => {
+  console.error("Failed to start the server due to MongoDB connection failure");
+});
