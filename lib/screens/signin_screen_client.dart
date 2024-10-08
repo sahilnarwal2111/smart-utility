@@ -20,6 +20,8 @@ class _ClientSignInScreenState extends State<ClientSignInScreen> {
   bool rememberPassword = true;
   String _email = "";
   String _password = "";
+  bool wrongCreds = false;
+  bool internalServerError = false;
 
   void _submitForm() async{
     if(_formSignInKey.currentState!.validate()){
@@ -31,7 +33,9 @@ class _ClientSignInScreenState extends State<ClientSignInScreen> {
         'username': _email,  // Replace with your actual data
         'password': _password
       });
-
+      print(_email);
+      print(_password);
+      print(body);
       try {
         final response = await http.post(url, headers: headers, body: body);
         
@@ -46,11 +50,19 @@ class _ClientSignInScreenState extends State<ClientSignInScreen> {
             MaterialPageRoute(builder: (context) => const ClientProfile()),
           );
         } else {
+          setState(() {
+            wrongCreds = true;
+            internalServerError = false; // Reset if this was previously set
+          });
           // Handle errors here (e.g., show a message)
           print('Error: ${response.statusCode}  Body :    ${response.body}');
         }
       } catch (e) {
         // Handle network or server errors
+         setState(() {
+          internalServerError = true;
+          wrongCreds = false; // Reset if this was previously set
+        });
         print('Exception: $e');
       }
     }
@@ -201,27 +213,38 @@ class _ClientSignInScreenState extends State<ClientSignInScreen> {
                       ),
                       SizedBox(
                         width: double.infinity,
-                        child: ElevatedButton(
+                        child: Column(
+                          children: [
+                            ElevatedButton(
                        
-                          onPressed: () {
-                            if (_formSignInKey.currentState!.validate() &&
-                                rememberPassword) {
-                                  _submitForm();
-                              // ScaffoldMessenger.of(context).showSnackBar(
-                              //   const SnackBar(
-                              //     content: Text('Processing Data'),
-                              //   ),
-                              // );
-                            } else if (!rememberPassword) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text(
-                                        'Please agree to the processing of personal data')),
-                              );
-                            }
-                          },
-                          child: const Text('Sign in'),
-                        ),
+                            onPressed: () {
+                              if (_formSignInKey.currentState!.validate() &&
+                                  rememberPassword) {
+                                    _submitForm();
+                            
+                              } else if (!rememberPassword) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text(
+                                          'Please agree to the processing of personal data')),
+                                );
+                              }
+                            },
+                            child: const Text('Sign in'),
+                            ),
+                            // Conditionally show error messages
+                            if (wrongCreds)
+                              const Text(
+                                'Wrong Email or Password',
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            if (internalServerError)
+                              const Text(
+                                'Internal Server Error',
+                                style: TextStyle(color: Colors.red),
+                              ),
+                          ],
+                        )
                       ),
                       const SizedBox(
                         height: 25.0,
