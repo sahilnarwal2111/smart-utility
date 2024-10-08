@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:test_drive/widgets/custom_search_delagate.dart';
+import 'package:test_drive/widgets/search_bar.dart';
 
 class ClientDashboard extends StatefulWidget{
   final String? address1;
@@ -21,6 +21,7 @@ class _ClientDashboardState extends State<ClientDashboard> {
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blue[100],
         title: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
@@ -37,51 +38,62 @@ class _ClientDashboardState extends State<ClientDashboard> {
                 
               ],
             ),
-             
+            const Spacer(),
             const CircleAvatar(
               radius: 20,
               backgroundImage: NetworkImage(
-                'https://unsplash.com/photos/black-flat-screen-computer-monitor-gA396xahf-Q',
+                'https://images.unsplash.com/photo-1573497491208-6b1acb260507',
               ),
             ),
           ],
         )
       ),
-      body: Column(
+      body: Container(
+        height: double.infinity,
+        color: Colors.blue[100],
+        child: SingleChildScrollView(
+        child: Column(
         children: <Widget>[
-          Row(
+
+          const DashboardSearch(),
+          const SizedBox(height: 60.0),
+          //all cards from here
+          const Row(
             children: [
               Padding(
-                padding: const EdgeInsets.all(0),
-                child: IconButton(
-                      onPressed:(){
-                        showSearch(context: context, delegate: CustomSearchDelegate());
-                      }, 
-                      icon: const Icon(Icons.search),
-                    ),
+                padding: EdgeInsets.fromLTRB(30, 10, 10, 10),
+                child: Text(
+                'Explore all Services',
+                style: TextStyle(
+                  fontSize: 16.0,
+                ),
+              ),
               )
             ],
           ),
-          const SizedBox(height: 120.0),
-          //all cards from here
-           
+          // const SizedBox(height: 30.0),
           Row(
+            
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Card(
             color: Colors.amber[300],
-            child: Container(
+            child: SizedBox(
               width: 100,
               height: 100,
               child: Center(
                 child: Column(
                   children: <Widget>[
-                      Text(
+                      const Text(
                         'Electrican',
                         textAlign: TextAlign.center,
 
                       ),
-                      Image.network('https://unsplash.com/photos/man-in-blue-white-and-red-plaid-button-up-shirt-wearing-yellow-hard-hat-holding-black-zWOgsj3j0wA')
+                      Image.network(
+                        'https://images.unsplash.com/photo-1573497491208-6b1acb260507',
+                        height: 80,
+                        width: 80,
+                        )
                   ],
                 )
               )
@@ -159,6 +171,8 @@ class _ClientDashboardState extends State<ClientDashboard> {
           ) ,
 
         ],
+      ),
+      ),
       )
     );
     
