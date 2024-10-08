@@ -4,8 +4,8 @@ import 'package:test_drive/theme/theme.dart';
 import 'package:test_drive/widgets/custom_scaffold.dart';
 import 'package:test_drive/screens/signup_screen_client.dart';
 import 'package:icons_plus/icons_plus.dart';
-
-
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 
   class ClientSignInScreen extends StatefulWidget {
@@ -21,13 +21,38 @@ class _ClientSignInScreenState extends State<ClientSignInScreen> {
   String _email = "";
   String _password = "";
 
-  void _submitForm(){
+  void _submitForm() async{
     if(_formSignInKey.currentState!.validate()){
       _formSignInKey.currentState!.save();
-      Navigator.push(
-        context, 
-        MaterialPageRoute(builder: (context)=> const ClientProfile()),
-        );
+      
+      final url = Uri.parse('http://10.0.2.2:3001/api/login/client');
+      final headers = {'Content-Type': 'application/json'};
+      final body = json.encode({
+        'username': _email,  // Replace with your actual data
+        'password': _password
+      });
+
+      try {
+        final response = await http.post(url, headers: headers, body: body);
+        
+        if (response.statusCode == 200) {
+          // Successful response
+          final responseData = json.decode(response.body);
+          print(responseData);
+
+          // Navigate to ClientProfile if API call is successful
+          Navigator.push(
+            context, 
+            MaterialPageRoute(builder: (context) => const ClientProfile()),
+          );
+        } else {
+          // Handle errors here (e.g., show a message)
+          print('Error: ${response.statusCode}  Body :    ${response.body}');
+        }
+      } catch (e) {
+        // Handle network or server errors
+        print('Exception: $e');
+      }
     }
   }
 
@@ -111,6 +136,9 @@ class _ClientSignInScreenState extends State<ClientSignInScreen> {
                             return 'Please enter Password';
                           }
                           return null;
+                        },
+                        onSaved: (value){
+                          _password = value!;
                         },
                         decoration: InputDecoration(
                           label: const Text('Password'),

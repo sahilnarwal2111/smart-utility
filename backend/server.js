@@ -1,10 +1,11 @@
 const express = require('express');
 const connectDB = require('./config/config');  // Import the database config
 const AuthRouter = require('./routes/AuthRoutes');
+const cors = require('cors')
 
 
 const app = express();
-
+app.use(cors());
 // Middleware setup
 app.use(express.json()); // For parsing JSON requests
 
