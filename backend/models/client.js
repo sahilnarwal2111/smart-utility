@@ -28,6 +28,14 @@ const clientSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,  // Auto-assigns current date and time
   },
+  resetToken: {
+    type:String,
+    default: null,
+  },
+  resetTokenExpires: {
+    type: Date,
+    default: Date.now,
+  }
 });
 
 // Create the Client model based on the schema
