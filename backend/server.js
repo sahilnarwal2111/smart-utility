@@ -24,7 +24,7 @@ const startServer = () => {
 
 // Connect to MongoDB and start the server only if the connection is successful
 connectDB().then((connected) => {
-  if (connected) {
+  if (connected) {  
     startServer();  // Start the server if MongoDB connection is successful
   }
 }).catch((err) => {
