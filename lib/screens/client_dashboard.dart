@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:test_drive/widgets/search_bar.dart';
+import 'package:test_drive/widgets/service_grid.dart';
 
 class ClientDashboard extends StatefulWidget{
   final String? address1;
@@ -58,118 +59,20 @@ class _ClientDashboardState extends State<ClientDashboard> {
           const DashboardSearch(),
           const SizedBox(height: 60.0),
           //all cards from here
-          const Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.fromLTRB(30, 10, 10, 10),
-                child: Text(
-                'Explore all Services',
-                style: TextStyle(
-                  fontSize: 16.0,
+          const Padding(
+                padding: const EdgeInsets.fromLTRB(30, 10, 10, 10),
+                child: Row(
+                  children: const [
+                    Text(
+                      'Explore all Services',
+                      style: TextStyle(
+                        fontSize: 16.0,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              )
-            ],
-          ),
-          // const SizedBox(height: 30.0),
-          Row(
-            
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Card(
-            color: Colors.amber[300],
-            child: SizedBox(
-              width: 100,
-              height: 100,
-              child: Center(
-                child: Column(
-                  children: <Widget>[
-                      const Text(
-                        'Electrican',
-                        textAlign: TextAlign.center,
-
-                      ),
-                      Image.network(
-                        'https://images.unsplash.com/photo-1573497491208-6b1acb260507',
-                        height: 80,
-                        width: 80,
-                        )
-                  ],
-                )
-              )
-            ),
-          ),
-          Card(
-            color: Colors.amber[300],
-            child: Container(
-              width: 100,
-              height: 100,
-            ),
-          ),
-          Card(
-            color: Colors.amber[300],
-            child: Container(
-              width: 100,
-              height: 100,
-            ),
-          )
-            ],
-          ),
-           const SizedBox(height: 30.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Card(
-            color: Colors.amber[300],
-            child: Container(
-              width: 100,
-              height: 100,
-            ),
-          ),
-          Card(
-            color: Colors.amber[300],
-            child: Container(
-              width: 100,
-              height: 100,
-            ),
-          ),
-          Card(
-            color: Colors.amber[300],
-            child: Container(
-              width: 100,
-              height: 100,
-            ),
-          )
-            ],
-          ),
-            const SizedBox(height: 30.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Card(
-            color: Colors.amber[300],
-            child: Container(
-              width: 100,
-              height: 100,
-            ),
-          ),
-          Card(
-            color: Colors.amber[300],
-            child: Container(
-              width: 100,
-              height: 100,
-            ),
-          ),
-          Card(
-            color: Colors.amber[300],
-            child: Container(
-              width: 100,
-              height: 100,
-            ),
-          )
-            ],
-          ) ,
-
+          ServicesGrid()
         ],
       ),
       ),

@@ -3,6 +3,8 @@ import 'package:test_drive/theme/theme.dart';
 import 'package:test_drive/widgets/custom_scaffold.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:test_drive/screens/provider_home_page.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 
 class ProviderSignUpScreen extends StatefulWidget {
@@ -15,13 +17,59 @@ class ProviderSignUpScreen extends StatefulWidget {
 class _ProviderSignUpScreenState extends State<ProviderSignUpScreen> {
   final _formSignupKey = GlobalKey<FormState>();
   bool agreePersonalData = true;
-  void _submitForm(){
+  String _email = "";
+  String _password = "";
+  String _fullName = "";
+  bool internalServerError = false;
+  bool wrongCreds = false;
+  void _submitForm() async{
     if(_formSignupKey.currentState!.validate()){
       _formSignupKey.currentState!.save();
-      Navigator.push(
-        context, 
-        MaterialPageRoute(builder: (context)=> const ProviderProfile()),
-        );
+
+      final url = Uri.parse('http://10.0.2.2:3001/api/signup/provider');
+      final headers = {'Content-Type': 'application/json'};
+      final body = json.encode({
+        'username': _email,  // Replace with your actual data
+        'email': _email,  // Replace with your actual data
+        'password': _password,
+        'phone': "9999999999",
+        'services' : 'electrican'
+      });
+      print(_email);
+      print(_password);
+      print(body);
+
+      try {
+        final response = await http.post(url, headers: headers, body: body);
+        
+        if (response.statusCode == 200) {
+          // Successful response
+          final responseData = json.decode(response.body);
+          print(responseData);
+
+          // Navigate to ClientProfile if API call is successful
+          Navigator.push(
+            context, 
+            MaterialPageRoute(builder: (context)=> const ProviderProfile()),
+            );
+        } else {
+          setState(() {
+            wrongCreds = true;
+            internalServerError = false; // Reset if this was previously set
+          });
+          // Handle errors here (e.g., show a message)
+          print('Error: ${response.statusCode}  Body :    ${response.body}');
+        }
+      } catch (e) {
+        // Handle network or server errors
+         setState(() {
+          internalServerError = true;
+          wrongCreds = false; // Reset if this was previously set
+        });
+        print('Exception: $e');
+      }
+
+      
     }
   }
   @override
@@ -73,6 +121,9 @@ class _ProviderSignUpScreenState extends State<ProviderSignUpScreen> {
                           }
                           return null;
                         },
+                        onSaved: (value){
+                          _email = value!;
+                        },
                         decoration: InputDecoration(
                           label: const Text('Full Name'),
                           hintText: 'Enter Full Name',
@@ -103,6 +154,9 @@ class _ProviderSignUpScreenState extends State<ProviderSignUpScreen> {
                             return 'Please enter Email';
                           }
                           return null;
+                        },
+                        onSaved: (value){
+                          _email = value!;
                         },
                         decoration: InputDecoration(
                           label: const Text('Email'),
@@ -136,6 +190,9 @@ class _ProviderSignUpScreenState extends State<ProviderSignUpScreen> {
                             return 'Please enter Password';
                           }
                           return null;
+                        },
+                        onSaved: (value){
+                          _password = value!;
                         },
                         decoration: InputDecoration(
                           label: const Text('Password'),

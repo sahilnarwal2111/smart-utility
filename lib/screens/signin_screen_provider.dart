@@ -3,6 +3,8 @@ import 'package:test_drive/theme/theme.dart';
 import 'package:test_drive/widgets/custom_scaffold.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:test_drive/screens/provider_home_page.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 
 
@@ -19,14 +21,52 @@ class _ProviderSignInScreenState extends State<ProviderSignInScreen> {
   bool rememberPassword = true;
   String _email = "";
   String _password = "";
+  bool wrongCreds = false;
+  bool internalServerError = false;
 
-  void _submitForm(){
+  void _submitForm() async{
     if(_formSignInKey.currentState!.validate()){
       _formSignInKey.currentState!.save();
-      Navigator.push(
-        context, 
-        MaterialPageRoute(builder: (context)=> const ProviderProfile()),
-        );
+
+      final url = Uri.parse('http://10.0.2.2:3001/api/login/provider');
+      final headers = {'Content-Type': 'application/json'};
+      final body = json.encode({
+        'username': _email,  // Replace with your actual data
+        'password': _password
+      });
+      print(_email);
+      print(_password);
+      print(body);
+      try {
+        final response = await http.post(url, headers: headers, body: body);
+        
+        if (response.statusCode == 200) {
+          // Successful response
+          final responseData = json.decode(response.body);
+          print(responseData);
+
+          // Navigate to ClientProfile if API call is successful
+          Navigator.push(
+            context, 
+            MaterialPageRoute(builder: (context)=> const ProviderProfile()),
+            );
+        } else {
+          setState(() {
+            wrongCreds = true;
+            internalServerError = false; // Reset if this was previously set
+          });
+          // Handle errors here (e.g., show a message)
+          print('Error: ${response.statusCode}  Body :    ${response.body}');
+        }
+      } catch (e) {
+        // Handle network or server errors
+         setState(() {
+          internalServerError = true;
+          wrongCreds = false; // Reset if this was previously set
+        });
+        print('Exception: $e');
+      }
+      
     }
   }
 
@@ -111,6 +151,9 @@ class _ProviderSignInScreenState extends State<ProviderSignInScreen> {
                           }
                           return null;
                         },
+                        onSaved: (value){
+                          _password = value!;
+                        },
                         decoration: InputDecoration(
                           label: const Text('Password'),
                           hintText: 'Enter Password',
@@ -178,11 +221,7 @@ class _ProviderSignInScreenState extends State<ProviderSignInScreen> {
                             if (_formSignInKey.currentState!.validate() &&
                                 rememberPassword) {
                                   _submitForm();
-                              // ScaffoldMessenger.of(context).showSnackBar(
-                              //   const SnackBar(
-                              //     content: Text('Processing Data'),
-                              //   ),
-                              // );
+                           
                             } else if (!rememberPassword) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
@@ -194,6 +233,17 @@ class _ProviderSignInScreenState extends State<ProviderSignInScreen> {
                           child: const Text('Sign in'),
                         ),
                       ),
+                                                  // Conditionally show error messages
+                            if (wrongCreds)
+                              const Text(
+                                'Wrong Email or Password',
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            if (internalServerError)
+                              const Text(
+                                'Internal Server Error',
+                                style: TextStyle(color: Colors.red),
+                              ),
                       const SizedBox(
                         height: 25.0,
                       ),

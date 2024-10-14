@@ -4,6 +4,8 @@ import 'package:test_drive/widgets/custom_scaffold.dart';
 import 'package:test_drive/screens/signin_screen_client.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:test_drive/screens/client_home_page.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 
 class ClientSignUpScreen extends StatefulWidget {
@@ -16,14 +18,59 @@ class ClientSignUpScreen extends StatefulWidget {
 class _ClientSignUpScreenState extends State<ClientSignUpScreen> {
   final _formSignupKey = GlobalKey<FormState>();
   bool agreePersonalData = true;
+  String _email = "";
+  String _password = "";
+  String _fullName = "";
+  bool internalServerError = false;
+  bool wrongCreds = false;
 
-  void _submitForm(){
+  void _submitForm() async{
     if(_formSignupKey.currentState!.validate()){
       _formSignupKey.currentState!.save();
-      Navigator.push(
-        context, 
-        MaterialPageRoute(builder: (context)=> const ClientProfile()),
-        );
+
+      final url = Uri.parse('http://10.0.2.2:3001/api/signup/client');
+      final headers = {'Content-Type': 'application/json'};
+      final body = json.encode({
+        'username': _email,  // Replace with your actual data
+        'email': _email,  // Replace with your actual data
+        'password': _password,
+        'phone': "9999999999"
+      });
+      print(_email);
+      print(_password);
+      print(body);
+
+      try {
+        final response = await http.post(url, headers: headers, body: body);
+        
+        if (response.statusCode == 200) {
+          // Successful response
+          final responseData = json.decode(response.body);
+          print(responseData);
+
+          // Navigate to ClientProfile if API call is successful
+          Navigator.push(
+            context, 
+            MaterialPageRoute(builder: (context)=> const ClientProfile()),
+            );
+        } else {
+          setState(() {
+            wrongCreds = true;
+            internalServerError = false; // Reset if this was previously set
+          });
+          // Handle errors here (e.g., show a message)
+          print('Error: ${response.statusCode}  Body :    ${response.body}');
+        }
+      } catch (e) {
+        // Handle network or server errors
+         setState(() {
+          internalServerError = true;
+          wrongCreds = false; // Reset if this was previously set
+        });
+        print('Exception: $e');
+      }
+
+      
     }
   }
 
@@ -77,6 +124,9 @@ class _ClientSignUpScreenState extends State<ClientSignUpScreen> {
                           }
                           return null;
                         },
+                        onSaved: (value){
+                          _email = value!;
+                        },
                         decoration: InputDecoration(
                           label: const Text('Full Name'),
                           hintText: 'Enter Full Name',
@@ -107,6 +157,9 @@ class _ClientSignUpScreenState extends State<ClientSignUpScreen> {
                             return 'Please enter Email';
                           }
                           return null;
+                        },
+                        onSaved: (value){
+                          _email = value!;
                         },
                         decoration: InputDecoration(
                           label: const Text('Email'),
@@ -140,6 +193,9 @@ class _ClientSignUpScreenState extends State<ClientSignUpScreen> {
                             return 'Please enter Password';
                           }
                           return null;
+                        },
+                        onSaved: (value){
+                          _password = value!;
                         },
                         decoration: InputDecoration(
                           label: const Text('Password'),
@@ -218,6 +274,16 @@ class _ClientSignUpScreenState extends State<ClientSignUpScreen> {
                           child: const Text('Sign up'),
                         ),
                       ),
+                      if (wrongCreds)
+                        const Text(
+                          'Email already exists. Try with Another email',
+                          style: TextStyle(color: Colors.red),
+                        ),
+                      if (internalServerError)
+                        const Text(
+                          'Internal Server Error',
+                          style: TextStyle(color: Colors.red),
+                        ),
                       const SizedBox(
                         height: 30.0,
                       ),
