@@ -31,7 +31,7 @@ class _ClientSignUpScreenState extends State<ClientSignUpScreen> {
       final url = Uri.parse('http://10.0.2.2:3001/api/signup/client');
       final headers = {'Content-Type': 'application/json'};
       final body = json.encode({
-        'username': _email,  // Replace with your actual data
+        'username': _fullName,  // Replace with your actual data
         'email': _email,  // Replace with your actual data
         'password': _password,
         'phone': "9999999999"
@@ -51,7 +51,7 @@ class _ClientSignUpScreenState extends State<ClientSignUpScreen> {
           // Navigate to ClientProfile if API call is successful
           Navigator.push(
             context, 
-            MaterialPageRoute(builder: (context)=> const ClientProfile()),
+            MaterialPageRoute(builder: (context)=> ClientProfile(email: _email,)),
             );
         } else {
           setState(() {
@@ -120,7 +120,7 @@ class _ClientSignUpScreenState extends State<ClientSignUpScreen> {
                       TextFormField(
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter Full name';
+                            return 'Please enter your name';
                           }
                           return null;
                         },
@@ -128,8 +128,8 @@ class _ClientSignUpScreenState extends State<ClientSignUpScreen> {
                           _email = value!;
                         },
                         decoration: InputDecoration(
-                          label: const Text('Full Name'),
-                          hintText: 'Enter Full Name',
+                          label: const Text('Name'),
+                          hintText: 'Enter Name',
                           hintStyle: const TextStyle(
                             color: Colors.black26,
                           ),

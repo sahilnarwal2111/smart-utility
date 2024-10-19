@@ -47,7 +47,7 @@ class _ClientSignInScreenState extends State<ClientSignInScreen> {
           // Navigate to ClientProfile if API call is successful
           Navigator.push(
             context, 
-            MaterialPageRoute(builder: (context) => const ClientProfile()),
+            MaterialPageRoute(builder: (context) => ClientProfile(email: _email!)),
           );
         } else {
           setState(() {

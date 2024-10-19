@@ -50,7 +50,7 @@ class _ProviderSignUpScreenState extends State<ProviderSignUpScreen> {
           // Navigate to ClientProfile if API call is successful
           Navigator.push(
             context, 
-            MaterialPageRoute(builder: (context)=> const ProviderProfile()),
+            MaterialPageRoute(builder: (context)=> ProviderProfile(email: _email,)),
             );
         } else {
           setState(() {
