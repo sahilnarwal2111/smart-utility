@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_drive/screens/booking_service_page.dart';
 
 class DashboardSearch extends StatefulWidget{
   const DashboardSearch({super.key});
@@ -11,7 +12,7 @@ class DashboardSearch extends StatefulWidget{
 
 class _DashboardSearch extends State<DashboardSearch> {
   @override
-  final List<String> services = ['Electrician', 'Plumber', 'Hair Cur for Men', 'Hair Cut for Women', 'AC Service', 'House Cleaning'];
+  final List<String> services = ['Women Salon & Spa', 'Men Salon & Spa', 'AC & Appliance Repair', 'Cleaning & Pest Control', 'Electrician, Plumber & Carpenter', 'Naive Water Purifier'];
   Widget build(BuildContext context) {
     return Padding(
           padding: const EdgeInsets.all(8.0),
@@ -38,7 +39,12 @@ class _DashboardSearch extends State<DashboardSearch> {
                   title: Text(item),
                   onTap: () {
                     setState(() {
-                      controller.closeView(item);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BookingServicePage(service: item),
+                        ),
+                      );
                     });
                   },
                 );
