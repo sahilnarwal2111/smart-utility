@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:test_drive/screens/checkout_page.dart';
 class BookingServicePage extends StatelessWidget{
   final String service;
   BookingServicePage({required this.service});
@@ -10,7 +10,7 @@ class BookingServicePage extends StatelessWidget{
     {"shopName": "Provider 2", "price": "\$30", "rating": 4.0},
     {"shopName": "Provider 3", "price": "\$70", "rating": 5.0},
   ];
-
+    
   @override
    Widget build(BuildContext context) {
     return Scaffold(
@@ -21,13 +21,13 @@ class BookingServicePage extends StatelessWidget{
           Container(
             width: double.infinity,
             height: 200, // Adjust height based on design
-            decoration: const BoxDecoration(
-              color: Colors.blue,
-              image: DecorationImage(
-                image: NetworkImage('https://example.com/banner.jpg'), // Replace with actual URL
-                fit: BoxFit.cover,
-              ),
-            ),
+            // decoration: const BoxDecoration(
+            //   color: Colors.blue,
+            //   image: DecorationImage(
+            //     image: AssetImage('assets/icons/pin.png'), // Replace with actual URL
+            //     fit: BoxFit.cover,
+            //   ),
+            // ),
             child: const Center(
               child: Text(
                 'Banner Photo',
@@ -60,7 +60,21 @@ class BookingServicePage extends StatelessWidget{
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                  child: Card(
+                  child: GestureDetector(
+                    onTap: () {
+                      print("Clicked Checkout widget,,,");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CheckoutView(
+                            serviceName: providers[index]['shopName'],
+                            providerName: service,
+                          ),
+                        ),
+                      );
+                    },
+                    child: Card(
+                    
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -101,6 +115,8 @@ class BookingServicePage extends StatelessWidget{
                       ),
                     ),
                   ),
+                  ),
+                  
                 );
               },
             ),
