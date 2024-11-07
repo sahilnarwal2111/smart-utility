@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 class ClientProfile extends StatefulWidget {
   final String email;
-  const ClientProfile({required this.email});
+  const ClientProfile({required this.email, super.key});
 
   @override
   _ClientProfile createState() => _ClientProfile();
@@ -114,7 +114,7 @@ class _ClientProfile extends State<ClientProfile> {
                           _buildTextField(
                             labelText: 'Name',
                             initialValue: _name,
-                            onSaved: (value) => _name = value!,
+                            onSaved: (value) => _name = value,
                           ),
                           const SizedBox(height: 15),
                           _buildTextField(
@@ -126,19 +126,19 @@ class _ClientProfile extends State<ClientProfile> {
                           _buildTextField(
                             labelText: 'Address 1',
                             initialValue: _address1,
-                            onSaved: (value) => _address1 = value!,
+                            onSaved: (value) => _address1 = value,
                           ),
                           const SizedBox(height: 15),
                           _buildTextField(
                             labelText: 'Address 2',
                             initialValue: _address2,
-                            onSaved: (value) => _address2 = value!,
+                            onSaved: (value) => _address2 = value,
                           ),
                           const SizedBox(height: 15),
                           _buildTextField(
                             labelText: 'Phone',
                             initialValue: _phone,
-                            onSaved: (value) => _phone = value!,
+                            onSaved: (value) => _phone = value,
                           ),
                           const SizedBox(height: 30),
                           ElevatedButton(

@@ -22,7 +22,7 @@ class _ProviderProfile extends State<ProviderProfile> {
   String _phone = "";
 
   // Flag to check if the data is being loaded
-  bool _isLoading = true;
+  bool _isLoading = false;
 
   // Fetch user details using API
   Future<void> _fetchProviderDetails(String email) async {
@@ -114,7 +114,7 @@ class _ProviderProfile extends State<ProviderProfile> {
                           _buildTextField(
                             labelText: 'Name',
                             initialValue: _name,
-                            onSaved: (value) => _name = value!,
+                            onSaved: (value) => _name = value,
                           ),
                           const SizedBox(height: 15),
                           _buildTextField(
@@ -126,19 +126,19 @@ class _ProviderProfile extends State<ProviderProfile> {
                           _buildTextField(
                             labelText: 'Address 1',
                             initialValue: _address1,
-                            onSaved: (value) => _address1 = value!,
+                            onSaved: (value) => _address1 = value,
                           ),
                           const SizedBox(height: 15),
                           _buildTextField(
                             labelText: 'Address 2',
                             initialValue: _address2,
-                            onSaved: (value) => _address2 = value!,
+                            onSaved: (value) => _address2 = value,
                           ),
                           const SizedBox(height: 15),
                           _buildTextField(
                             labelText: 'Phone',
                             initialValue: _phone,
-                            onSaved: (value) => _phone = value!,
+                            onSaved: (value) => _phone = value,
                           ),
                           const SizedBox(height: 30),
                           ElevatedButton(
