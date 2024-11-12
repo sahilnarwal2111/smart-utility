@@ -72,12 +72,12 @@ import 'package:test_drive/screens/booking_service_page.dart';
 
 class ServicesGrid extends StatelessWidget {
   final List<Map<String, dynamic>> services = [
-    {"title": "Women's Salon & Spa", "icon": Icons.face_retouching_natural},
-    {"title": "Men's Salon & Massage", "icon": Icons.face},
-    {"title": "AC & Appliance Repair", "icon": Icons.ac_unit},
-    {"title": "Cleaning & Pest Control", "icon": Icons.cleaning_services},
-    {"title": "Electrician, Plumber & Carpenter", "icon": Icons.build},
-    {"title": "Native Water Purifier", "icon": Icons.water_damage},
+    {"title": "Women's Salon & Spa", "icon": Icons.face_retouching_natural, "banner": "women-salon.jpg"},
+    {"title": "Men's Salon & Massage", "icon": Icons.face, "banner": "men-salon.jpg"},
+    {"title": "AC & Appliance Repair", "icon": Icons.ac_unit, "banner": "ac-repair.jpg"},
+    {"title": "Cleaning & Pest Control", "icon": Icons.cleaning_services, "banner": "cleaning-pest-control.jpg"},
+    {"title": "Electrician, Plumber & Carpenter", "icon": Icons.build, "banner": "electrician.jpg"},
+    {"title": "Native Water Purifier", "icon": Icons.water_damage, "banner": "water-purifier.jpg"},
   ];
 
   @override
@@ -100,7 +100,7 @@ class ServicesGrid extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => BookingServicePage(service: services[index]['title']!),
+                  builder: (context) => BookingServicePage(service: services[index]['title']!, banner: services[index]['banner']!),
                 ),
               );
             },  // Wrap Navigator.push inside a closure

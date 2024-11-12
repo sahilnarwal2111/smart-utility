@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:test_drive/screens/checkout_page.dart';
 class BookingServicePage extends StatelessWidget{
   final String service;
-  BookingServicePage({required this.service});
+  final String banner;
+  BookingServicePage({required this.service, required this.banner});
 
   // need to make a api call to fetch all providers from database
   final List<Map<String, dynamic>> providers = [
@@ -21,16 +22,16 @@ class BookingServicePage extends StatelessWidget{
           Container(
             width: double.infinity,
             height: 200, // Adjust height based on design
-            // decoration: const BoxDecoration(
-            //   color: Colors.blue,
-            //   image: DecorationImage(
-            //     image: AssetImage('assets/icons/pin.png'), // Replace with actual URL
-            //     fit: BoxFit.cover,
-            //   ),
-            // ),
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              image: DecorationImage(
+                image: AssetImage('assets/images/services-banner/$banner'), // Replace with actual URL
+                fit: BoxFit.cover,
+              ),
+            ),
             child: const Center(
               child: Text(
-                'Banner Photo',
+                '',
                 style: TextStyle(
                   fontSize: 24,
                   color: Colors.white,
