@@ -18,8 +18,10 @@ const providerSchema = new mongoose.Schema({
     required: true,
   },
   services:{
-    type:Array,
-    required: true,
+    type:Array
+  },
+  booking:{
+    type:Object
   },
   phone: {
     type: String,
