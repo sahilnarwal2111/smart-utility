@@ -10,7 +10,7 @@ exports.getProvidersWithService = async (req,res) => {
         const {service} = req.body;
         let name = service.toLowerCase().trim()
         console.log(service)
-        let data  = await Services.findOne({serviceName:service})
+        let data  = await Services.findOne({serviceName:name})
         console.log(data)
         
         let providerData = await Provider.find({username: { $in: data.providers}}).select('-password')

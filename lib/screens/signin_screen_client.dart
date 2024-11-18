@@ -27,7 +27,7 @@ class _ClientSignInScreenState extends State<ClientSignInScreen> {
     if(_formSignInKey.currentState!.validate()){
       _formSignInKey.currentState!.save();
       
-      final url = Uri.parse('http://10.0.2.2:3001/api/login/client');
+      final url = Uri.parse('http://10.0.2.2:3001/api/auth/login/client');
       final headers = {'Content-Type': 'application/json'};
       final body = json.encode({
         'username': _email,  // Replace with your actual data
