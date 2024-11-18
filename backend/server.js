@@ -3,6 +3,8 @@ const connectDB = require('./config/config');  // Import the database config
 const AuthRouter = require('./routes/AuthRoutes');
 const ModifyRouter = require('./routes/ModifyRoutes')
 const GetRouter = require('./routes/GetRoutes')
+const BookingRouter = require('./routes/BookingRoutes')
+
 const cors = require('cors')
 
 
@@ -16,6 +18,7 @@ app.use(express.json()); // For parsing JSON requests
 app.use("/api/auth",AuthRouter);
 app.use("/api/modify",ModifyRouter)
 app.use("/api/get-details",GetRouter)
+app.use("/api/book",BookingRouter)
 // Function to start the server
 const startServer = () => {
   const PORT = process.env.PORT || 5000;
