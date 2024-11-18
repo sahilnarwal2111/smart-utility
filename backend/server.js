@@ -1,6 +1,8 @@
 const express = require('express');
 const connectDB = require('./config/config');  // Import the database config
 const AuthRouter = require('./routes/AuthRoutes');
+const ModifyRouter = require('./routes/ModifyRoutes')
+const GetRouter = require('./routes/GetRoutes')
 const cors = require('cors')
 
 
@@ -11,9 +13,9 @@ app.use(express.json()); // For parsing JSON requests
 
 
 // setting API's 
-app.use("/api",AuthRouter);
-
-
+app.use("/api/auth",AuthRouter);
+app.use("/api/modify",ModifyRouter)
+app.use("/api/get-details",GetRouter)
 // Function to start the server
 const startServer = () => {
   const PORT = process.env.PORT || 5000;
