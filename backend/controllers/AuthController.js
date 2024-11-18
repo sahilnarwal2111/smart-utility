@@ -66,6 +66,10 @@ exports.signupProvider = async (req,res) => {
 
         user = await Provider.create({
             ...req.body,
+            services:[],
+            booking:{
+                None:[]
+            },
             password: await bcrypt.hash(password,10)
         });
 

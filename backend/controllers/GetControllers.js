@@ -8,6 +8,7 @@ dotenv.config();
 exports.getProvidersWithService = async (req,res) => {
     try{
         const {service} = req.body;
+        let name = service.toLowerCase().trim()
         console.log(service)
         let data  = await Services.findOne({serviceName:service})
         console.log(data)
