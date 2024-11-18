@@ -63,7 +63,7 @@ class BookingServicePage extends StatelessWidget{
                   padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                   child: GestureDetector(
                     onTap: () {
-                      print("Clicked Checkout widget,,,");
+                      // print("Clicked Checkout widget,,,");
                       Navigator.push(
                         context,
                         MaterialPageRoute(

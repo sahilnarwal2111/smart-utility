@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_drive/screens/welcome_screen.dart';
-import 'package:test_drive/screens/checkout_page.dart';
+// import 'package:test_drive/screens/checkout_page.dart';
 
 
 void main(){
