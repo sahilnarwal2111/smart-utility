@@ -286,8 +286,8 @@ class _BookingServicePageState extends State<BookingServicePage> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => CheckoutView(
-                                      serviceName: providers[index]['shopName'],
                                       providerName: widget.service,
+                                      serviceName: providers[index]['shopName']
                                     ),
                                   ),
                                 );
