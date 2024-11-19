@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_drive/screens/client_dashboard.dart';
 import 'package:test_drive/screens/client_home_page.dart';
 import 'package:test_drive/theme/theme.dart';
 import 'package:test_drive/widgets/custom_scaffold.dart';
@@ -47,7 +48,8 @@ class _ClientSignInScreenState extends State<ClientSignInScreen> {
           // Navigate to ClientProfile if API call is successful
           Navigator.push(
             context, 
-            MaterialPageRoute(builder: (context) => ClientProfile(email: _email)),
+            // MaterialPageRoute(builder: (context) => ClientProfile(email: _email)),
+            MaterialPageRoute(builder: (context) => ClientDashboard(address1: "a", address2: "a", clientName: _email,)),
           );
         } else {
           setState(() {
@@ -309,6 +311,7 @@ class _ClientSignInScreenState extends State<ClientSignInScreen> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (e) => const ClientSignUpScreen(),
+                                  // builder: (e) => const ClientSignUpScreen(_email),
                                 ),
                               );
                             },

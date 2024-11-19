@@ -499,7 +499,7 @@ class _CheckoutViewState extends State<CheckoutView> {
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       backgroundColor: primaryColor500,
-                      minimumSize: Size(100, 45),
+                      minimumSize: const Size(100, 45),
                       shape: RoundedRectangleBorder(
                           borderRadius:
                               BorderRadius.circular(borderRadiusSize))),
@@ -530,13 +530,13 @@ class _CheckoutViewState extends State<CheckoutView> {
                             'date': _dateTime.toIso8601String().split('T')[0], // Format date as YYYY-MM-DD
                             'time': selectedTime,
                           });
-                          print(_dateTime.toIso8601String().split('T')[0]);
-                          print(widget.providerName);
-                          print(widget.serviceName);
-                          print(selectedTime);
+                          // print(_dateTime.toIso8601String().split('T')[0]);
+                          // print(widget.providerName);
+                          // print(widget.serviceName);
+                          // print(selectedTime);
                           final response = await http.post(url, headers: headers, body: body);
-                          print(response.statusCode);
-                          print("hello");
+                          // print(response.statusCode);
+                          // print("hello");
                           if (response.statusCode == 200) {
                             var responseJson = jsonDecode(response.body);
                             if (responseJson['booked'] == true) {
@@ -554,14 +554,14 @@ class _CheckoutViewState extends State<CheckoutView> {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
-                                    title: Text('Already Booked !'),
-                                    content: Text('Try to book with another date and time.'),
+                                    title: const Text('Already Booked !'),
+                                    content: const Text('Try to book with another date and time.'),
                                     actions: [
                                       TextButton(
                                         onPressed: () {
                                           Navigator.of(context).pop();
                                         },
-                                        child: Text('OK'),
+                                        child: const Text('OK'),
                                       ),
                                     ],
                                   );
@@ -574,14 +574,14 @@ class _CheckoutViewState extends State<CheckoutView> {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
-                                    title: Text('Internal Server Error'),
-                                    content: Text('Try after some time'),
+                                    title: const Text('Internal Server Error'),
+                                    content: const Text('Try after some time'),
                                     actions: [
                                       TextButton(
                                         onPressed: () {
                                           Navigator.of(context).pop();
                                         },
-                                        child: Text('OK'),
+                                        child: const Text('OK'),
                                       ),
                                     ],
                                   );

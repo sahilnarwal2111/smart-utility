@@ -148,8 +148,9 @@ import 'package:test_drive/screens/checkout_page.dart';
 class BookingServicePage extends StatefulWidget {
   final String service;
   final String banner;
+  final String? clientName;
 
-  BookingServicePage({required this.service, required this.banner});
+  BookingServicePage({required this.service, required this.banner, required this.clientName});
 
   @override
   _BookingServicePageState createState() => _BookingServicePageState();

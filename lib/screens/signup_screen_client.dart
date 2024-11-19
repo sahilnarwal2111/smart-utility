@@ -28,7 +28,7 @@ class _ClientSignUpScreenState extends State<ClientSignUpScreen> {
     if(_formSignupKey.currentState!.validate()){
       _formSignupKey.currentState!.save();
 
-      final url = Uri.parse('http://10.0.2.2:3001/api/signup/client');
+      final url = Uri.parse('http://10.0.2.2:3001/api/auth/signup/client');
       final headers = {'Content-Type': 'application/json'};
       final body = json.encode({
         'username': _fullName,  // Replace with your actual data
@@ -55,6 +55,7 @@ class _ClientSignUpScreenState extends State<ClientSignUpScreen> {
             );
         } else {
           setState(() {
+            print("here");
             wrongCreds = true;
             internalServerError = false; // Reset if this was previously set
           });
@@ -125,7 +126,7 @@ class _ClientSignUpScreenState extends State<ClientSignUpScreen> {
                           return null;
                         },
                         onSaved: (value){
-                          _email = value!;
+                          _fullName = value!;
                         },
                         decoration: InputDecoration(
                           label: const Text('Name'),
