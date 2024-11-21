@@ -1,3 +1,4 @@
+const Client = require("../models/client")
 const Provider = require("../models/provider");
 const Services = require("../models/service");
 const Booking = require("../models/booking")
@@ -95,5 +96,46 @@ exports.getAllServices = async (req,res) => {
     }
     catch(error){
         res.status(500).json({message:"Internal Server Error"})
+    }
+}
+
+exports.getClientData = async (req,res) => {
+    try{
+        const {username} = req.body;
+        let user = await Client.findOne({username:username}).select('-password').select('-resetToken');
+        if(!user){
+            return res.status(400).json({message:"User Not Found"})
+        }
+
+        const response = {
+            message: " Data Fetched Successfully",
+            data : user
+        }
+
+        res.status(200).json(response);
+    }
+    catch(err){
+        console.log(err.message)
+        res.status(500).json({message:"Internal Server Error."});
+    }
+}
+
+exports.getProviderData = async (req,res) => {
+    try{
+        const {username} = req.body;
+        let user = await Provider.findOne({username:username}).select('-password').select('-resetToken')
+        if(!user){
+            return res.status(400).json({message:"User Not Found"})
+        }
+
+        const response = {
+            message: " Data Fetched Successfully",
+            data : user
+        }
+
+        res.status(200).json(response);
+    }
+    catch(err){
+        res.status(500).json({message:"Internal Server Error."});
     }
 }
