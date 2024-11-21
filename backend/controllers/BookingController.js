@@ -16,7 +16,7 @@ exports.bookProvider = async (req,res) => {
         }
         if(provider.booking[date][time] !== ""){
                 console.log("here2")
-                return res.status(400).json({message:"Already Booked",added:false})
+                return res.status(400).json({message:"Already Booked",booked:false})
         }
         
         let booking = await Booking.create({
@@ -41,6 +41,6 @@ exports.bookProvider = async (req,res) => {
     }
     catch(error){
         console.log(error.message)
-        res.status(500).json({message:"Internal Server Error"})
+        res.status(500).json({message:"Internal Server Error",booked:false})
     }
 } 
