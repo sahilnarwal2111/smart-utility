@@ -6,4 +6,5 @@ router.post("/get-providers-with-service",GetController.getProvidersWithService)
 router.get("/get-all-providers",GetController.getAllProviders);
 router.post("/get-bookings-client",GetController.getClientBookings)
 router.post("/get-bookings-provider",GetController.getProviderBookings)
+router.post("/get-services",GetController.getAllServices)
 module.exports = router;
