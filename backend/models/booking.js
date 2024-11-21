@@ -14,6 +14,12 @@ const bookingSchema = new mongoose.Schema({
     type:String,
     required:true
   },
+  date: {
+    type:String
+  },
+  time: {
+    type:String
+  },
   price: {
     type: String
   },
