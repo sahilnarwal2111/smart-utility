@@ -51,8 +51,8 @@ class _TransactionHistoryViewState extends State<TransactionHistoryView>
       body: TabBarView(
         controller: _tabController,
         children: [
-          OrderView(clientName: 'first',),
-          HistoryView(),
+          OrderView(clientName: 'first'),
+          HistoryView(clientName: 'first'),
         ],
       ),
     );

@@ -3,6 +3,7 @@ import 'package:test_drive/theme/theme.dart';
 import 'package:test_drive/widgets/custom_scaffold.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:test_drive/screens/provider_home_page.dart';
+import 'package:test_drive/screens/signin_screen_provider.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -26,7 +27,7 @@ class _ProviderSignUpScreenState extends State<ProviderSignUpScreen> {
     if(_formSignupKey.currentState!.validate()){
       _formSignupKey.currentState!.save();
 
-      final url = Uri.parse('http://10.0.2.2:3001/api/signup/provider');
+      final url = Uri.parse('http://10.0.2.2:3001/api/auth/signup/provider');
       final headers = {'Content-Type': 'application/json'};
       final body = json.encode({
         'username': _email,  // Replace with your actual data
@@ -335,7 +336,7 @@ class _ProviderSignUpScreenState extends State<ProviderSignUpScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (e) => const ProviderSignUpScreen(),
+                                  builder: (e) => const ProviderSignInScreen(),
                                 ),
                               );
                             },

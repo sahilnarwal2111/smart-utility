@@ -3,6 +3,7 @@ import 'package:test_drive/theme/theme.dart';
 import 'package:test_drive/widgets/custom_scaffold.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:test_drive/screens/provider_home_page.dart';
+import 'package:test_drive/screens/signup_screen_provider.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -28,18 +29,19 @@ class _ProviderSignInScreenState extends State<ProviderSignInScreen> {
     if(_formSignInKey.currentState!.validate()){
       _formSignInKey.currentState!.save();
 
-      final url = Uri.parse('http://10.0.2.2:3001/api/login/provider');
+      final url = Uri.parse('http://10.0.2.2:3001/api/auth/login/provider');
       final headers = {'Content-Type': 'application/json'};
       final body = json.encode({
-        'username': _email,  // Replace with your actual data
+        'username': _email,
+        // 'username': 'mainProvider',
         'password': _password
+        // 'password': 'password'
       });
       print(_email);
       print(_password);
       print(body);
       try {
         final response = await http.post(url, headers: headers, body: body);
-        
         if (response.statusCode == 200) {
           // Successful response
           final responseData = json.decode(response.body);
@@ -306,7 +308,7 @@ class _ProviderSignInScreenState extends State<ProviderSignInScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (e) => const ProviderSignInScreen(),
+                                  builder: (e) => const ProviderSignUpScreen(),
                                 ),
                               );
                             },

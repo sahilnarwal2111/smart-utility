@@ -523,16 +523,16 @@ class _CheckoutViewState extends State<CheckoutView> {
                           final headers = {'Content-Type': 'application/json'};
                           final body = json.encode({
                             'clientUsername': 'first', // Replace with actual username
-                            // 'providerUsername': widget.providerName,
-                            'providerUsername': 'mainProvider',
-                            'service': widget.serviceName,
+                            'providerUsername': widget.serviceName,
+                            // 'providerUsername': 'mainProvider',
+                            'service': widget.providerName,
                             // 'date': '2024-11-30', // Format date as YYYY-MM-DD
                             'date': _dateTime.toIso8601String().split('T')[0], // Format date as YYYY-MM-DD
                             'time': selectedTime,
                           });
                           // print(_dateTime.toIso8601String().split('T')[0]);
-                          // print(widget.providerName);
-                          // print(widget.serviceName);
+                          print(widget.providerName);
+                          print(widget.serviceName);
                           // print(selectedTime);
                           final response = await http.post(url, headers: headers, body: body);
                           // print(response.statusCode);
