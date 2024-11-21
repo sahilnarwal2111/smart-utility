@@ -71,6 +71,7 @@ import 'package:flutter/material.dart';
 import 'package:test_drive/screens/booking_service_page.dart';
 
 class ServicesGrid extends StatelessWidget {
+  final String? clientName;
   final List<Map<String, dynamic>> services = [
     {"title": "Women's Salon & Spa", "icon": Icons.face_retouching_natural, "banner": "women-salon.jpg"},
     {"title": "Men's Salon & Massage", "icon": Icons.face, "banner": "men-salon.jpg"},
@@ -79,7 +80,7 @@ class ServicesGrid extends StatelessWidget {
     {"title": "Electrician, Plumber & Carpenter", "icon": Icons.build, "banner": "electrician.jpg"},
     {"title": "Native Water Purifier", "icon": Icons.water_damage, "banner": "water-purifier.jpg"},
   ];
-
+  ServicesGrid({required this.clientName});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -97,10 +98,12 @@ class ServicesGrid extends StatelessWidget {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
+              print(clientName);
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => BookingServicePage(service: services[index]['title']!, banner: services[index]['banner']!),
+                  // builder: (context) => BookingServicePage(service: services[index]['title']!, banner: services[index]['banner']!),
+                  builder: (context) => BookingServicePage(service: services[index]['title']!, banner: services[index]['banner']!, clientName: clientName),
                 ),
               );
             },  // Wrap Navigator.push inside a closure

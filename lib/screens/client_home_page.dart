@@ -154,6 +154,8 @@ class _ClientProfile extends State<ClientProfile> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => ClientDashboard(
+                                    // need to add username here
+                                    clientName: _email,
                                     address1: _address1,
                                     address2: _address2,
                                   ),

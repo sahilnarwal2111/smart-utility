@@ -11,8 +11,7 @@ class DashboardSearch extends StatefulWidget{
 }
 
 class _DashboardSearch extends State<DashboardSearch> {
-  @override
-  // final List<String> services = ['Women Salon & Spa', 'Men Salon & Spa', 'AC & Appliance Repair', 'Cleaning & Pest Control', 'Electrician, Plumber & Carpenter', 'Naive Water Purifier'];
+  // final String? clientName;
   final List<Map<String, dynamic>> services = [
     {"title": "Women's Salon & Spa", "icon": Icons.face_retouching_natural, "banner": "women-salon.jpg"},
     {"title": "Men's Salon & Massage", "icon": Icons.face, "banner": "men-salon.jpg"},
@@ -21,6 +20,8 @@ class _DashboardSearch extends State<DashboardSearch> {
     {"title": "Electrician, Plumber & Carpenter", "icon": Icons.build, "banner": "electrician.jpg"},
     {"title": "Native Water Purifier", "icon": Icons.water_damage, "banner": "water-purifier.jpg"},
   ];
+  // DashboardSearch({required this.clientName})
+  @override
   Widget build(BuildContext context) {
     return Padding(
           padding: const EdgeInsets.all(8.0),
@@ -50,7 +51,7 @@ class _DashboardSearch extends State<DashboardSearch> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => BookingServicePage(service: item, banner: services[index]['banner'],),
+                          builder: (context) => BookingServicePage(service: item, banner: services[index]['banner'], clientName: "first",),
                         ),
                       );
                     });
