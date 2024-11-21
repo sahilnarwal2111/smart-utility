@@ -223,6 +223,7 @@
 //   }
 // }
 import 'package:flutter/material.dart';
+import 'package:test_drive/screens/client_home_page.dart';
 import 'package:test_drive/widgets/search_bar.dart';
 import 'package:test_drive/widgets/service_grid.dart';
 import 'package:test_drive/theme/theme.dart';
@@ -339,10 +340,11 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
 }
 
 class ClientDashboard extends StatefulWidget {
+  final String? clientName;
   final String? address1;
   final String? address2;
 
-  const ClientDashboard({Key? key, this.address1, this.address2}) : super(key: key);
+  const ClientDashboard({Key? key, this.clientName,this.address1, this.address2}) : super(key: key);
 
   @override
   _ClientDashboardState createState() => _ClientDashboardState();
@@ -373,30 +375,47 @@ class _ClientDashboardState extends State<ClientDashboard> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  widget.address1 ?? "Default Address Line 1",
-                  style: const TextStyle(fontSize: 20.0),
-                ),
-                Text(
-                  widget.address2 ?? "Default Address Line 2",
-                  style: const TextStyle(fontSize: 15.0),
-                ),
+                // Text(
+                //   widget.address1 ?? "Default Address Line 1",
+                //   style: const TextStyle(fontSize: 20.0),
+                // ),
+                
+                // Text(
+                //   widget.address2 ?? "Default Address Line 2",
+                //   style: const TextStyle(fontSize: 15.0),
+                // ),
               ],
             ),
             const Spacer(),
-            const CircleAvatar(
-              radius: 20,
-              backgroundImage: NetworkImage(
-                'https://images.unsplash.com/photo-1573497491208-6b1acb260507',
-              ),
-            ),
+            // const CircleAvatar(
+            //   radius: 20,
+            //   backgroundImage: NetworkImage(
+            //     'https://images.unsplash.com/photo-1573497491208-6b1acb260507',
+            //   ),
+            // ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+            builder: (context) => ClientProfile(email: widget.clientName!,),
+          ),
+        );
+      },
+      child: const CircleAvatar(
+        radius: 20,
+        backgroundImage: NetworkImage(
+          'https://images.unsplash.com/photo-1573497491208-6b1acb260507',
+        ),
+      ),
+    ),
           ],
         ),
       ),
       body: _currentIndex == 0
           ? Column(
               children: [
-                const DashboardSearch(),
+                // const DashboardSearch(),
                 const SizedBox(height: 60.0),
                 const Padding(
                   padding: EdgeInsets.fromLTRB(30, 10, 10, 10),
@@ -405,7 +424,7 @@ class _ClientDashboardState extends State<ClientDashboard> {
                     style: TextStyle(fontSize: 25.0),
                   ),
                 ),
-                ServicesGrid(),
+                ServicesGrid(clientName: widget.clientName),
               ],
             )
           : screens[_currentIndex], // Display appropriate screen based on _currentIndex

@@ -3,7 +3,8 @@ import 'package:test_drive/theme/theme.dart';
 import 'package:test_drive/components/no_transaction_message.dart';
 
 class HistoryView extends StatelessWidget {
-  const HistoryView({Key? key}) : super(key: key);
+  final String? clientName;
+  const HistoryView({Key? key, this.clientName}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
