@@ -81,3 +81,19 @@ exports.getProviderBookings = async (req,res) => {
         res.status(500).json({message:"Internal Server Error"})
     }
 }
+
+exports.getAllServices = async (req,res) => {
+    try{
+        let services = await Services.find();
+
+        const response = {
+            message : "all available services",
+            services : services
+        }
+        
+        res.status(200).json(response)
+    }
+    catch(error){
+        res.status(500).json({message:"Internal Server Error"})
+    }
+}
